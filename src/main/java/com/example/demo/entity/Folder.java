@@ -21,7 +21,7 @@ public class Folder {
     private String folderName;
 
     @ManyToOne //유저 한 명 당 folder 여러 개
-    @JoinColumn(name="memberId")
-    private Member member;
+    @JoinColumn(name="userId")
+    private User user;
 
 }
