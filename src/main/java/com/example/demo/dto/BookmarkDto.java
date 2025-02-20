@@ -10,14 +10,14 @@ import lombok.*;
 @ToString
 public class BookmarkDto {
     private Integer bookmarkId;
-    private Integer memberId;
+    private Integer userId;
     private Integer placeId;
     private Integer folderId;
 
     public static BookmarkDto createBookmarkDto(Bookmark bookmark) {
         return new BookmarkDto(
                 bookmark.getBookmarkId(),
-                bookmark.getMember().getMemberId(),
+                bookmark.getUser().getUserId(),
                 bookmark.getPlace().getPlaceId(),
                 bookmark.getFolder().getFolderId()
         );
