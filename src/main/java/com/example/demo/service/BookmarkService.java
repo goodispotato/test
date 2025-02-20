@@ -13,6 +13,7 @@ import com.example.demo.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -23,11 +24,9 @@ public class BookmarkService {
     private FolderRepository folderRepository;
     @Autowired
     private PlaceRepository placeRepository;
-    @Autowired
-    private UserRepository userRepository;
 
-    public Bookmark save(BookmarkDto bookmarkDto) {
-        User user= userRepository.findById(bookmarkDto.getUserId()).orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
+    @Transactional
+    public Bookmark save(User user, BookmarkDto bookmarkDto) {
         Place place = placeRepository.findById(bookmarkDto.getPlaceId()).orElseThrow(() -> new IllegalArgumentException("장소를 찾을 수 없습니다."));
         Folder folder=folderRepository.findById(bookmarkDto.getFolderId()).orElseThrow(() -> new IllegalArgumentException("저장 목록을 찾을 수 없습니다."));
 
