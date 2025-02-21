@@ -1,13 +1,12 @@
 package com.example.demo.entity;
 
+import com.example.demo.dto.FolderDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Getter
+@Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,5 +22,18 @@ public class Folder {
     @ManyToOne //유저 한 명 당 folder 여러 개
     @JoinColumn(name="userId")
     private User user;
+
+    public static Folder createFolder(FolderDto folderDto, User user){
+        return new Folder(
+                folderDto.getFolderId(),
+                folderDto.getFolderName(),
+                user
+        );
+    }
+
+    public void patch(Folder folder){
+        if(folder.folderName!=null)
+            this.folderName= folder.folderName;
+    }
 
 }
