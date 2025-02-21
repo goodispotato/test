@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 public class BookmarkService {
@@ -49,5 +51,14 @@ public class BookmarkService {
 
         bookmarkRepository.delete(target);
         return target;
+    }
+
+    //저장 목록 내역 화면
+    public List<Bookmark> showBookmarksInFolder(Integer folderId){
+        Folder folder = folderRepository.findById(folderId).orElse(null);
+        if(folder.getFolderId() == null){
+            throw new IllegalArgumentException("없는 폴더입니다.");
+        }
+        return bookmarkRepository.findByFolder(folder);
     }
 }

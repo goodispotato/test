@@ -1,7 +1,9 @@
 package com.example.demo.api;
 
 import com.example.demo.dto.FolderDto;
+import com.example.demo.entity.Bookmark;
 import com.example.demo.entity.Folder;
+import com.example.demo.service.BookmarkService;
 import com.example.demo.service.FolderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,12 +12,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 public class FolderApiController {
 
     @Autowired
     private FolderService folderService;
+    @Autowired
+    private BookmarkService bookmarkService;
 
 
     // 폴더 생성
@@ -44,6 +50,10 @@ public class FolderApiController {
                 ResponseEntity.status(HttpStatus.OK).body(updated):
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+
+
+
+
 
 
 }

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 public class FolderService {
@@ -56,4 +58,6 @@ public class FolderService {
         return folderRepository.save(target);
 
     }
+
+    public List<Folder> showFolders() {return folderRepository.findAll();}
 }
