@@ -22,4 +22,7 @@ public class PlaceService {
         return placeRepository.findByCategoryNames(categoryNames, categoryNames.size());
     }
 
+    public Place showPlacePageById(Integer placeId) {
+        return placeRepository.findById(placeId).orElse(null);
+    }
 }
