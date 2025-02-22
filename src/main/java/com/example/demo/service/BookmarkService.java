@@ -16,9 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.List;
-
 
 
 @Service
@@ -31,9 +29,11 @@ public class BookmarkService {
 
     @Autowired
     private PlaceRepository placeRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    @Transactional
-    public Bookmark save(User user, BookmarkDto bookmarkDto) {
+    public Bookmark save(BookmarkDto bookmarkDto) {
+        User user= userRepository.findById(bookmarkDto.getUserId()).orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
         Place place = placeRepository.findById(bookmarkDto.getPlaceId()).orElseThrow(() -> new IllegalArgumentException("장소를 찾을 수 없습니다."));
         Folder folder=folderRepository.findById(bookmarkDto.getFolderId()).orElseThrow(() -> new IllegalArgumentException("저장 목록을 찾을 수 없습니다."));
 

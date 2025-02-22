@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Getter
 @ToString
@@ -15,9 +18,6 @@ public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int placeId;
-
-    @Column
-    private int categoryId;
 
     @Column
     private String placeName;
@@ -34,6 +34,12 @@ public class Place {
     @Column
     private String contact;
 
-    @Column
-    private String categoryName;
+
+    @ManyToMany
+    @JoinTable(
+            name = "place_category",
+            joinColumns = @JoinColumn(name = "place_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories = new HashSet<>();
 }

@@ -1,10 +1,14 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -14,12 +18,12 @@ import lombok.ToString;
 public class Category {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer bookmarkId;
-
-    @ManyToOne //장소 하나 당 카테고리 여러 개
-    @JoinColumn(name="placeId")
-    private Place place;
+    private Integer categoryId;
 
     @Column(name="categoryName")
     private String categoryName;
+
+    @ManyToMany(mappedBy = "categories")
+    @JsonIgnore
+    private Set<Place> places = new HashSet<>();
 }

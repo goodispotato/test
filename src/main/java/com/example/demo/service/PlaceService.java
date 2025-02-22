@@ -18,8 +18,8 @@ public class PlaceService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<Place> searchPlacesByCategoryName(String categoryName) {
-        return placeRepository.findByCategoryName(categoryName);
+    public List<Place> searchPlacesByCategories(List<String> categoryNames) {
+        return placeRepository.findByCategoryNames(categoryNames, categoryNames.size());
     }
 
 }
